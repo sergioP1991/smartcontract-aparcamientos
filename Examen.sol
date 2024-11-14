@@ -33,4 +33,8 @@ contract Examen {
         }
     }
 
+    function darNota(address idAlumno) public view returns(uint8){
+        return alumnos[idAlumno].nota;
+    }
+
 }
