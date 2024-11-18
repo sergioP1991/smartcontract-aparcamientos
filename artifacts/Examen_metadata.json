@@ -1,0 +1,148 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "alumnos",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "corregido",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "aprobado",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "nota",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "matricula",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "idAlumno",
+						"type": "address"
+					}
+				],
+				"name": "darNota",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minNota",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "idAlumno",
+						"type": "address"
+					},
+					{
+						"internalType": "uint8",
+						"name": "nota",
+						"type": "uint8"
+					}
+				],
+				"name": "ponerNota",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Examen.sol": "Examen"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Examen.sol": {
+			"keccak256": "0x7c078ea3abe098b6d53be50669a89b71a77740eb31683e513b51a81bf24330ab",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://13452cdef8c7a08beca2581669ec58b8fc4f38304c3f317d6f1d806ac2cc0e82",
+				"dweb:/ipfs/QmXvW4URDVhiiUQpo4E8B13zQSV5spMrJAVqksa14rPCEv"
+			]
+		}
+	},
+	"version": 1
+}
