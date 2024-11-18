@@ -120,4 +120,13 @@ contract ApuestaSimple {
         address payable wallet = payable(address(beneficiary));
         wallet.transfer(highestBid);
     }
+
+    function isBeatHigh() public view returns (bool) {
+
+        if (highestBidder == msg.sender) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
