@@ -16,6 +16,9 @@ contract ApuestaSimple {
     // Retiradas de dinero permitidas de las anteriores pujas
     mapping(address => uint) pendingReturns;
 
+    // Timestamp de las bit
+    mapping(address => uint) timestampBit;
+
     // Fijado como true al final, no permite ningún cambio.
     bool ended;
 
@@ -50,6 +53,9 @@ contract ApuestaSimple {
         // es necesaria para que la función pueda recibir Ether.
         require(msg.sender != beneficiary);
 
+        // require timestamp bit
+        require(block.timestamp >= (timestampBit[msg.sender]));
+
         // Revierte la llamada si el periodo
         // de pujas ha finalizado.
         require(block.timestamp <= (auctionStart + biddingTime));
@@ -67,6 +73,7 @@ contract ApuestaSimple {
             // saquen su propio dinero.
             pendingReturns[highestBidder] += highestBid;
         }
+        timestampBit[highestBidder] = block.timestamp + 10;
         highestBidder = msg.sender;
         highestBid = msg.value;
         emit HighestBidIncreased(msg.sender, msg.value);
