@@ -32,10 +32,9 @@ contract ApuestaSimple {
     /// de `_biddingTime` segundos. El beneficiario de
     /// las pujas es la dirección `_beneficiary`.
     constructor (
-        uint _biddingTime,
-        address _beneficiary
+        uint _biddingTime
     ) {
-        beneficiary = _beneficiary;
+        beneficiary = msg.sender;
         auctionStart = block.timestamp;
         biddingTime = _biddingTime;
     }
@@ -49,6 +48,7 @@ contract ApuestaSimple {
         // la información necesaria es parte de
         // la transacción. La palabra payable
         // es necesaria para que la función pueda recibir Ether.
+        require(msg.sender != beneficiary);
 
         // Revierte la llamada si el periodo
         // de pujas ha finalizado.
@@ -128,5 +128,10 @@ contract ApuestaSimple {
         } else {
             return false;
         }
+    }
+
+    /// Ver el amount del withdrawals
+    function withdrawAmount() public view returns (uint)  {        
+        return pendingReturns[msg.sender];
     }
 }
