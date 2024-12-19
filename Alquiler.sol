@@ -10,6 +10,7 @@ contract Alquiler {
     uint256 public duracionAlquiler;
     uint256 public montoAlquiler;
     bool public alquilado;
+    uint public balanceAlquiler;
 
     event AlquilerIniciado(address indexed inquilino, string idPlaza, uint256 inicioAlquiler, uint256 duracionAlquiler, uint256 montoAlquiler);
     event AlquilerFinalizado(address indexed inquilino, string idPlaza, uint256 finAlquiler);
@@ -28,14 +29,20 @@ contract Alquiler {
         owner = msg.sender;
     }
 
-    function iniciarAlquiler(address _inquilino, string calldata _idplaza, uint256 _duracionAlquiler, uint256 _montoAlquiler) public soloOwner {
+    function iniciarAlquiler(address _inquilino, string calldata _idplaza, uint256 _duracionAlquiler, uint256 _montoAlquiler) public payable  {
         require(!alquilado, "Ya hay un alquiler en curso");
+
+        require(msg.sender != owner, "El owner del contrato no puede alquilar la plaza");
+        require(msg.value == _montoAlquiler, "El precio enviado tiene que ser igual al precio del alquiler");
+
         inquilino = _inquilino;
         idPlaza = _idplaza;
         inicioAlquiler = block.timestamp;
         duracionAlquiler = _duracionAlquiler;
         montoAlquiler = _montoAlquiler;
         alquilado = true;
+        balanceAlquiler = msg.value;
+
         emit AlquilerIniciado(inquilino, _idplaza, inicioAlquiler, duracionAlquiler, montoAlquiler);
     }
 
@@ -43,12 +50,7 @@ contract Alquiler {
         require(alquilado, "No hay un alquiler en curso");
         require(block.timestamp >= inicioAlquiler + duracionAlquiler, "El tiempo de alquiler no ha terminado");
         alquilado = false;
+        payable(owner).transfer(balanceAlquiler);
         emit AlquilerFinalizado(inquilino, idPlaza, block.timestamp);
-    }
-
-    function pagarAlquiler() public payable soloInquilino {
-        require(alquilado, "No hay un alquiler en curso");
-        require(msg.value == montoAlquiler, "Monto de alquiler incorrecto");
-        payable(owner).transfer(msg.value);
     }
 }
